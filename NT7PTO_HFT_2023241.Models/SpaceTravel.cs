@@ -30,6 +30,13 @@ namespace NT7PTO_HFT_2023241.Models
 
         public int travelStartYear { get; set; }
 
+        public virtual Captain captain { get; set; }
+        public virtual Spaceship spaceship { get; set; }
+
+        public SpaceTravel()
+        {
+
+        }
 
         public SpaceTravel(string travelId, string captainId, string spaceshipId, string travelFrom, string travelTo, int travelStartYear)
         {

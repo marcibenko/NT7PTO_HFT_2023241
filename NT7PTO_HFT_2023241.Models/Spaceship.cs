@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,17 +31,23 @@ namespace NT7PTO_HFT_2023241.Models
         public int size { get; set; } //carry capacity of a ship
 
         [ForeignKey("Captain")]
-        public string captain { get; set; }
+        public string captainId { get; set; }
 
+        public virtual Captain captain { get; set; }
+        public virtual ICollection<SpaceTravel> SpaceTravels { get; set; }
 
-       
-        public Spaceship(string spaceshipId, string shipName, SpaceshipType type, int size, string captain)
+        public Spaceship()
+        {
+            this.SpaceTravels = new HashSet<SpaceTravel>();
+        }
+
+        public Spaceship(string spaceshipId, string shipName, SpaceshipType type, int size, string captainId)
         {
             this.spaceshipId = spaceshipId;
             this.shipName = shipName;
             this.type = type;
             this.size = size;
-            this.captain = captain;
+            this.captainId = captainId;
         }
     }
 }

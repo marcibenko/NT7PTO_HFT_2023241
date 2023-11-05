@@ -24,8 +24,13 @@ namespace NT7PTO_HFT_2023241.Repository
             //LocalDb van -> InMemory kell majd
             if (!builder.IsConfigured)
             {
+
+                //connection string vegere: MultipleActiveResultSet = true -> lazy loading miatt
                 string conn =
-                    @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Márton\Desktop\hft\feleves\NT7PTO_HFT_2023241\NT7PTO_HFT_2023241.Repository\SpaceTraffic2.mdf;Integrated Security=True";
+                    @"Data Source=(LocalDB)\MSSQLLocalDB;
+                    AttachDbFilename=C:\Users\Márton\Desktop\hft\feleves\NT7PTO_HFT_2023241\NT7PTO_HFT_2023241.Repository\SpaceTraffic3.mdf;
+                    Integrated Security=True;
+                    MultipleActiveResultSets = true";
                 builder
                 .UseLazyLoadingProxies()
                 .UseSqlServer(conn);
@@ -40,14 +45,15 @@ namespace NT7PTO_HFT_2023241.Repository
                 .HasKey("captainId")
                 );
 
+            //spaceship relations
             modelBuilder.Entity<Spaceship>()
                 .HasKey(s => s.spaceshipId);
 
-            modelBuilder.Entity<Spaceship>()
-                .HasOne<Captain>()
-                .WithMany()
-                .HasForeignKey(ship => ship.captain)
-                .OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Spaceship>(ship => ship
+                .HasOne(ship => ship.captain)
+                .WithMany(cap => cap.Spaceships)
+                .HasForeignKey(ship => ship.captainId)
+                .OnDelete(DeleteBehavior.SetNull));
             ;
 
             //spacetravel relations
@@ -55,19 +61,19 @@ namespace NT7PTO_HFT_2023241.Repository
                 .HasKey(st => st.travelId);
 
 
-            modelBuilder.Entity<SpaceTravel>()
-                .HasOne<Captain>()
-                .WithMany()
+            modelBuilder.Entity<SpaceTravel>(st => st
+                .HasOne(trav => trav.captain)
+                .WithMany(cap => cap.SpaceTravels)
                 .HasForeignKey("captainId")
                 .OnDelete(DeleteBehavior.Cascade)
-                ;
+                );
 
-            modelBuilder.Entity<SpaceTravel>()
-                .HasOne<Spaceship>()
-                .WithMany()
+            modelBuilder.Entity<SpaceTravel>(st => st
+                .HasOne(trav => trav.spaceship)
+                .WithMany(ship => ship.SpaceTravels)
                 .HasForeignKey("spaceshipId")
                 .OnDelete(DeleteBehavior.Cascade)
-                ;
+                );
 
 
 

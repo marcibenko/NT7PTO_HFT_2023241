@@ -1,19 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="SpaceTraffic2.mdf" />
-    <None Remove="SpaceTraffic2_log.ldf" />
+    <None Remove="SpaceTraffic3.mdf" />
+    <None Remove="SpaceTraffic3_log.ldf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="SpaceTraffic2.mdf">
+    <Content Include="SpaceTraffic3.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SpaceTraffic2_log.ldf">
+    <Content Include="SpaceTraffic3_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
