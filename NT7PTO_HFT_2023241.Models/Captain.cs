@@ -13,16 +13,24 @@ namespace NT7PTO_HFT_2023241.Models
         
         
         [Key]
-        string captainID { get; set; }
+        [StringLength(6)]
+        public  string captainId { get; set; }
 
-        string name { get; set; }
+        [Required]
+        public string name { get; set; }
 
-        //nem lehet negativ
-        int age { get; set; }
+        
+        public int age { get; set; }
 
-        string birthPlace { get; set; }
+        public string birthPlace { get; set; }
 
 
-
+        public Captain(string captainId, string name, int age, string birthPlace)
+        {
+            this.captainId = captainId;
+            this.name = name;
+            this.age = age;
+            this.birthPlace = birthPlace;
+        }
     }
 }

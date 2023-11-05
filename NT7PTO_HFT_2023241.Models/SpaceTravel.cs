@@ -3,31 +3,42 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NT7PTO_HFT_2023241.Models
 {
-    class SpaceTravel
+    public class SpaceTravel
     {
            
         [Key]
-        string travelId;
+        [StringLength(10)]
+        public string travelId { get; set; }
 
         [ForeignKey("Captain")]
-        string CaptainId;
+        public string captainId { get; set; }
 
         [ForeignKey("Spaceship")]
-        string spaceshipId;
+        public string spaceshipId { get; set; }
+
+        [StringLength(40)]
+        public string travelFrom { get; set; }
+
+        [StringLength(40)]
+        public string travelTo { get; set; }
+
+        public int travelStartYear { get; set; }
 
 
-        string travelFrom;
-
-        string travelTo;
-
-        DateTime travelStartDate;
-
-
-
+        public SpaceTravel(string travelId, string captainId, string spaceshipId, string travelFrom, string travelTo, int travelStartYear)
+        {
+            this.travelId = travelId;
+            this.captainId = captainId;
+            this.spaceshipId = spaceshipId;
+            this.travelFrom = travelFrom;
+            this.travelTo = travelTo;
+            this.travelStartYear = travelStartYear;
+        }
     }
 }
