@@ -67,6 +67,24 @@ namespace NT7PTO_HFT_2023241.Logic
             public Captain Captain { get; set; }
             public List<Spaceship> Spaceships { get; set; }
 
+            public override bool Equals(object obj)
+            {
+                CapAndShips b = obj as CapAndShips;
+                if(b == null)
+                {
+                    return false;
+                }else
+                {
+                    return this.Captain == b.Captain &&
+                           this.Spaceships == b.Spaceships;
+                }
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.Captain,this.Spaceships);
+            }
+
         }
     }
 }
