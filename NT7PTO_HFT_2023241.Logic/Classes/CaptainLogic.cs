@@ -18,6 +18,10 @@ namespace NT7PTO_HFT_2023241.Logic
         }
         public void Create(Captain item)
         {
+            if (item.name.Length < 2)
+            {
+                throw new ArgumentException("Name too short...");
+            }
             this.repo.Create(item);          
         }
 
@@ -49,23 +53,28 @@ namespace NT7PTO_HFT_2023241.Logic
         //non cruds
         public IEnumerable<Captain> MostDangerousCaptains()
         {
-            return this.repo
+            var q1 = this.repo
                            .ReadAll()
-                           .Include(t => t.Spaceships)
+                           //.Include(t => t.Spaceships)
                            .Select(t => new
-                            {
-                             key = t,
-                             rating = t.Spaceships.Sum(s => s.size * (int)s.type)
-                            })
-                           .OrderByDescending(t => t.rating)
-                           .Select(t => t.key);
+                           {
+                               key = t,
+                               rating = t.Spaceships.Sum(s => (s.size * (int)s.type))
+                           })
+                           .OrderByDescending(t => t.rating);
+            //.Select(t => t.key);
+            ;
+            var q2 = q1.Select(t => t.key);
+
+            ;
+            return q2;
         }
 
         public IEnumerable<Captain> BiggestShip()
         {
             return this.repo
                         .ReadAll()
-                        .Include(t => t.Spaceships)
+                        //.Include(t => t.Spaceships)
                         .OrderByDescending(t => t.Spaceships.Count());
         }
     }
