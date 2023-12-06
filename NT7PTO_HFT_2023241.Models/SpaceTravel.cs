@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,13 +15,13 @@ namespace NT7PTO_HFT_2023241.Models
            
         [Key]
         [StringLength(10)]
-        public string travelId { get; set; }
+        public string travelId { get; set; } //pk
 
         [ForeignKey("Captain")]
-        public string captainId { get; set; }
+        public string captainId { get; set; } //fk to captain
 
         [ForeignKey("Spaceship")]
-        public string spaceshipId { get; set; }
+        public string spaceshipId { get; set; } //fk to ship
 
         [StringLength(40)]
         public string travelFrom { get; set; }
@@ -46,6 +47,21 @@ namespace NT7PTO_HFT_2023241.Models
             this.travelFrom = travelFrom;
             this.travelTo = travelTo;
             this.travelStartYear = travelStartYear;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            SpaceTravel otherTravel = (SpaceTravel)obj;
+
+            return travelId == otherTravel.travelId;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(travelId,travelFrom,travelTo);
         }
     }
 }
