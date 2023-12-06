@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Linq;
 
 namespace NT7PTO_HFT_2023241.Models
 {
@@ -9,18 +10,16 @@ namespace NT7PTO_HFT_2023241.Models
     {
         public enum SpaceshipType
         {
-            Fighter,
-            Cruiser,
-            Destroyer,
-            Battleship,
-            Transport
+            Fighter = 150,
+            Cruiser = 80,
+            Destroyer = 200,
+            Battleship = 170,
+            Transport = 100
         }
-        //hajoId, hajoNeve, tipusa, merete(foben kifejezve), kapitanya(csak egy), 
-        //valtozokat angolul!!!!!!!!!!!!!!
 
         [Key]
         [StringLength(6)]
-        public string spaceshipId { get; set; } 
+        public string spaceshipId { get; set; } //pk
 
         [StringLength(40)]
         [Required]
@@ -31,7 +30,7 @@ namespace NT7PTO_HFT_2023241.Models
         public int size { get; set; } //carry capacity of a ship
 
         [ForeignKey("Captain")]
-        public string captainId { get; set; }
+        public string captainId { get; set; } //fk to captain
 
         public virtual Captain captain { get; set; }
         public virtual ICollection<SpaceTravel> SpaceTravels { get; set; }
@@ -48,6 +47,20 @@ namespace NT7PTO_HFT_2023241.Models
             this.type = type;
             this.size = size;
             this.captainId = captainId;
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Spaceship otherShip = (Spaceship)obj;
+
+            return spaceshipId == otherShip.spaceshipId;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(spaceshipId,shipName,size);
         }
     }
 }
