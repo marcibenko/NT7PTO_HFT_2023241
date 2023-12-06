@@ -14,7 +14,7 @@ namespace NT7PTO_HFT_2023241.Models
         
         [Key]
         [StringLength(6)]
-        public  string captainId { get; set; }
+        public  string captainId { get; set; } //pk
 
         [Required]
         public string name { get; set; }
@@ -40,6 +40,22 @@ namespace NT7PTO_HFT_2023241.Models
             this.age = age;
             this.birthPlace = birthPlace;
             this.Spaceships = new HashSet<Spaceship>();
+            this.SpaceTravels = new HashSet<SpaceTravel>();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Captain otherCaptain = (Captain)obj;
+
+            return captainId == otherCaptain.captainId ;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(captainId, name, age, birthPlace);
         }
     }
 }
