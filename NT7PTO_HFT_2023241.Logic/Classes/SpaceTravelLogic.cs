@@ -45,7 +45,7 @@ namespace NT7PTO_HFT_2023241.Logic
         }
 
         //non cruds
-        IEnumerable<CaptainsTravels> MostTravels()
+        public IEnumerable<CaptainsTravels> MostTravels()
         {
             return this.repo
                         .ReadAll()
@@ -62,6 +62,26 @@ namespace NT7PTO_HFT_2023241.Logic
         {
             public Captain Captain { get; set; }
             public int NumberOfTravels { get; set; }
+
+            public override bool Equals(object obj)
+            {
+                CaptainsTravels b = obj as CaptainsTravels;
+                if(b == null)
+                {
+                    return false;
+                }else
+                {
+                    return this.Captain.captainId == b.Captain.captainId &&
+                           this.NumberOfTravels == b.NumberOfTravels;
+                }
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(this.Captain, this.NumberOfTravels);
+            }
         }
+
+        
     }
 }
