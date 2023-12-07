@@ -6,6 +6,7 @@ using System.Collections.Generic;
 namespace NT7PTO_HFT_2023241.Endpoint.Controllers
 {
     [Route("[controller]")]
+    [ApiController]
     public class SpaceshipController: ControllerBase
     {
         ISpaceshipLogic logic;

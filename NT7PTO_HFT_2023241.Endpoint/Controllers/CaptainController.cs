@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NT7PTO_HFT_2023241.Logic;
 using NT7PTO_HFT_2023241.Models;
-using System.Collections;
 using System.Collections.Generic;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NT7PTO_HFT_2023241.Endpoint.Controllers
 {
     [Route("[controller]")]
-    public class CaptainController: ControllerBase
+    [ApiController]
+    public class CaptainController : ControllerBase
     {
         ICaptainLogic logic;
 
@@ -45,6 +47,5 @@ namespace NT7PTO_HFT_2023241.Endpoint.Controllers
         {
             this.logic.Delete(id);
         }
-
     }
 }
