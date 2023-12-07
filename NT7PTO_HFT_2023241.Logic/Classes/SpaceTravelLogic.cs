@@ -49,13 +49,14 @@ namespace NT7PTO_HFT_2023241.Logic
         {
             return this.repo
                         .ReadAll()
+                        .AsEnumerable()
                         .GroupBy(t => t.captain)
                         .Select(t => new CaptainsTravels
                         {
                             Captain = t.Key,
                             NumberOfTravels = t.Count()
                         })
-                        .OrderBy(t => t.NumberOfTravels);
+                        .OrderByDescending(t => t.NumberOfTravels);
         }
 
         public class CaptainsTravels

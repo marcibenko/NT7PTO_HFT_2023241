@@ -56,9 +56,12 @@ namespace NT7PTO_HFT_2023241.Logic
         {
             return this.repo
                             .ReadAll()
+                            .AsEnumerable()
                             .GroupBy(t => t.captain)
                             .OrderByDescending(t => t.Count())
-                            .Select(t => new CapAndShips { Captain = t.Key, Spaceships = t.ToList()});
+                            .Select(t => 
+                            new CapAndShips { Captain = t.Key, Spaceships = t.ToList()});
+
         }
 
 

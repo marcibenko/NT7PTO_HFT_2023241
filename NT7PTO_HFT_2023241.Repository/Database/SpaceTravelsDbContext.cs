@@ -38,7 +38,7 @@ MultipleActiveResultSets = true";
 
                 builder
                 .UseLazyLoadingProxies()
-                .UseSqlServer(conn);
+                .UseInMemoryDatabase("DATABASE");
             }
         }
         

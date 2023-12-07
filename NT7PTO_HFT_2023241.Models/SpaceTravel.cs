@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace NT7PTO_HFT_2023241.Models
@@ -31,7 +32,9 @@ namespace NT7PTO_HFT_2023241.Models
 
         public int travelStartYear { get; set; }
 
+        [NotMapped]
         public virtual Captain captain { get; set; }
+        [NotMapped]
         public virtual Spaceship spaceship { get; set; }
 
         public SpaceTravel()

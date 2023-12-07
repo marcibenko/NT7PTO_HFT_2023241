@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using System.Xml.Linq;
 
 namespace NT7PTO_HFT_2023241.Models
@@ -32,7 +33,11 @@ namespace NT7PTO_HFT_2023241.Models
         [ForeignKey("Captain")]
         public string captainId { get; set; } //fk to captain
 
+        [JsonIgnore]
+        [NotMapped]
         public virtual Captain captain { get; set; }
+        [JsonIgnore]
+        [NotMapped]
         public virtual ICollection<SpaceTravel> SpaceTravels { get; set; }
 
         public Spaceship()

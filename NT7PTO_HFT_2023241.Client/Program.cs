@@ -309,7 +309,7 @@ namespace NT7PTO_HFT_2023241.Client
                     var l = rest.Get<CaptainsTravels>("noncrud/MostTravels");
                     foreach (var item in l)
                     {
-                        Console.WriteLine($"Captain: {item.Captain} number of travels: {item.NumberOfTravels.ToString()}");
+                        Console.WriteLine($"Captain: {item.Captain.name} number of travels: {item.NumberOfTravels.ToString()}");
                     }
                 }
                 catch (Exception e)
@@ -373,7 +373,7 @@ namespace NT7PTO_HFT_2023241.Client
                     var l = rest.Get<CapAndShips>("noncrud/CaptainsAndShips");
                     foreach (var item in l)
                     {
-                        Console.WriteLine($"Captain: {item.Captain}");
+                        Console.WriteLine($"Captain: {item.Captain.name}");
                         foreach (var ship in item.Spaceships)
                         {
                             Console.WriteLine($"\nShip name: {ship.shipName}");
@@ -386,15 +386,17 @@ namespace NT7PTO_HFT_2023241.Client
                     Console.ReadLine();
                 }
             }
+            Console.ReadKey();
         }
 
 
         static void Main(string[] args)
         {
-            rest = new RestService("http://localhost:5000/", "spacetravels");
+            rest = new RestService("http://localhost:5000/", "captain");
 
             var captainSubmenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Captain"))
+                .Add("GetOne", () => GetOne("Captain"))
                 .Add("Create", () => Create("Captain"))
                 .Add("Delete", () => Delete("Captain"))
                 .Add("Update", () => Update("Captain"))
@@ -402,6 +404,7 @@ namespace NT7PTO_HFT_2023241.Client
 
             var spaceshipSubmenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Spaceship"))
+                .Add("GetOne", () => GetOne("Spaceship"))
                 .Add("Create", () => Create("Spaceship"))
                 .Add("Delete", () => Delete("Spaceship"))
                 .Add("Update", () => Update("Spaceship"))
@@ -409,6 +412,7 @@ namespace NT7PTO_HFT_2023241.Client
 
             var spacetravelSubmenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("SpaceTravel"))
+                .Add("GetOne", () => GetOne("SpaceTravel"))
                 .Add("Create", () => Create("SpaceTravel"))
                 .Add("Delete", () => Delete("SpaceTravel"))
                 .Add("Update", () => Update("SpaceTravel"))
@@ -426,6 +430,7 @@ namespace NT7PTO_HFT_2023241.Client
                 .Add("Captains", () => captainSubmenu.Show())
                 .Add("Spaceships", () => spaceshipSubmenu.Show())
                 .Add("SpaceTravels", () => spacetravelSubmenu.Show())
+                .Add("Non-crud methods", () => noncrudSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();

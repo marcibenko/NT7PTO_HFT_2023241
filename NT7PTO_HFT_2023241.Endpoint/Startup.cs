@@ -19,6 +19,7 @@ namespace NT7PTO_HFT_2023241.Endpoint
 {
     public class Startup
     {
+        
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)

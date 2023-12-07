@@ -5,15 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="SpaceTraffic3.mdf" />
-    <None Remove="SpaceTraffic3_log.ldf" />
+    <None Remove="SpaceTraffic.mdf" />
+    <None Remove="SpaceTraffic_log.ldf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="SpaceTraffic3.mdf">
+    <Content Include="SpaceTraffic.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SpaceTraffic3_log.ldf">
+    <Content Include="SpaceTraffic_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -29,6 +29,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.14" />
 	</ItemGroup>
 
 </Project>
