@@ -1,1 +1,1 @@
-Ez a rétegezett alkalmazás a Haladó Fejlesztési Technikák nevezetű tárgyra készült.
+Ez a saját adatbázisra épülő rétegezett CRUD alkalmazás a Haladó Fejlesztési Technikák nevezetű tárgyra készült. A projekt célja a github, az adatbázis kezelés, CRUD metódusok, rétegezés valamint a tesztelés elsajátítása.
